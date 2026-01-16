@@ -12,27 +12,26 @@ if uploaded_file is not None:
   st.write(df)
   num_of_rows = len(df)
 
-  fdf = df[df.Sex =="female"]
-  num_female = len(fdf)
+  # Assuming 'type' is the column to categorize by
+  fdf = df[df.type == "Movie"]
+  num_movies = len(fdf)
 
-  mdf = df[df.Sex =="male"]
-  num_male = len(mdf)
+  tdf = df[df.type == "TV Show"]
+  num_tv_shows = len(tdf)
 
-  st.info(f"How many people in total servived the calamity?: {num_of_rows}")
+  st.info(f"How many titles in total?: {num_of_rows}")
 
-  st.info(f'How many were females?:{num_female}')
+  st.info(f'How many were movies?: {num_movies}')
   st.write(fdf)
 
-  st.info(f'How many erew males ?:{num_male}')
-  st.write(mdf)
+  st.info(f'How many were TV shows?: {num_tv_shows}')
+  st.write(tdf)
 
-  st.info('Showing total male vs female ratio:')
+  st.info('Showing total movies vs TV shows ratio:')
 
-  data = {"survived":[num_female,num_male], "gender":["female", "male"]}
-  df = pd.DataFrame(data)
-  df
-  st.bar_chart(data=df, x="gender", y="survived")
-
+  data = {"count":[num_movies,num_tv_shows], "type":["Movies", "TV Shows"]}
+  df_count = pd.DataFrame(data)
+  st.bar_chart(data=df_count, x="type", y="count")
 
 else:
     st.info('☝️ Upload a CSV file')
